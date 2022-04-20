@@ -1,17 +1,13 @@
+.8086
 
-.model small
-.stack
-.data
-    message   db "Hello World", "$"
-.code
-    main    proc
-        mov   ax,seg message
-        mov   ds,ax
-        mov   ah,09
-        lea   dx,message
-        int   21h
-        
-        mov   ax,4c00h
-        int   21h
-    main    endp
-end main
+code SEGMENT
+    ASSUME CS:code,DS:code,SS:code,ES:code
+    ORG 100h
+    START:
+        MOV AH,09h
+        MOV DX,offset hello_world
+        INT 21h
+        RET
+    hello_world db 'Hello,World!$'
+code ends
+end START
